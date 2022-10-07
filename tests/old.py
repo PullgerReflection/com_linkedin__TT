@@ -4,18 +4,18 @@ from pullgerReflection.com_linkedin__TT import models as com_linkedin__TT_MODEL
 from pullgerReflection.com_linkedin__TT import api as com_linkedin__TT_API
 
 
-class standardDataStructures():
-    @staticmethod
-    def personDATA():
-        return  {
-            'id': None,
-            'nick': 'kkonstantin',
-            'first_name': 'Konstantin',
-            'second_name': 'Kovalenko',
-            'full_name': 'Konstantin Kovalenko',
-            'discription': 'Full Stack Engineer at Bukovel',
-            'url': 'linkedin.com/in/kkonstantin'
-        }
+# class standardDataStructures():
+#     @staticmethod
+#     def personDATA():
+#         return  {
+#             'id': None,
+#             'nick': 'kkonstantin',
+#             'first_name': 'Konstantin',
+#             'second_name': 'Kovalenko',
+#             'full_name': 'Konstantin Kovalenko',
+#             'discription': 'Full Stack Engineer at Bukovel',
+#             'url': 'linkedin.com/in/kkonstantin'
+#         }
 
 class TestDB(TestCase):
     def test_DB1(self):
@@ -47,21 +47,21 @@ class TestDB(TestCase):
             self.assertEqual(getattr(checkNewObjectInstance,keyData), valueData, f'Incorrect compare DATA on new object in [{keyData}] field: [{getattr(checkNewObjectInstance,keyData)}]<>[{valueData}]')
 
         from django.apps import apps
-        from pullgerMultisessionManager_1 import api as pullgerMM_API
+        from pullgerMultiSessionManager import api as pullgerMM_API
 
-        reglament_app = apps.get_app_config('pullgerMultisessionManager')
+        reglament_app = apps.get_app_config('pullgerMultiSessionManager')
         reglament_app.multisessionManager = generator.ConnectionManager()
 
-        com_linkedin__TT_API.sendTaskForProcessing()
+        com_linkedin__TT_API.send_task_for_processing()
 
         #ADD TEST ACCOUNT
         from pullgerAccountManager.tests import dataFactory
         dataFactory.addLinkedinAccount()
         # ===================================================
-        pullgerMM_API.addNewSession()
+        pullgerMM_API.add_new_session()
         pullgerMM_API.executeTask()
         pullgerMM_API.executeTask()
-        pullgerMM_API.executeFinalizer()
+        pullgerMM_API.execute_finalizer()
 
     def test_SendTaskToTreatment(self):
         pass
