@@ -1,19 +1,20 @@
 from . import models as MODELS
-from pullgerMultisessionManager_1 import api as pullgerMultisessionManager_API
+from pullgerMultiSessionManager import api as pullgerMultiSessionManager_API
 from pullgerReflection.com_linkedin import TaskThread as com_linkedin_TASKTHREAD
 
-def sendTaskForProcessing():
-    '''
-    Send task for processing in pullgerMultisessionManager
-    '''
+
+def send_task_for_processing():
+    """
+    Send task for processing in pullgerMultiSessionManager
+    """
     unprocessedTasks = MODELS.LinkPeople.objects.getAllUnprocessedTask()
     for taskForProcessing in unprocessedTasks:
-        OparationClass = com_linkedin_TASKTHREAD.Operations.getOperationClassByName(taskForProcessing.handler)
+        oparation_class = com_linkedin_TASKTHREAD.Operations.getOperationClassByName(taskForProcessing.handler)
 
-        parameters = OparationClass.getMultisessionParameters()
+        parameters = oparation_class.get_multi_session_parameters()
         parameters['uuid_link'] = taskForProcessing.uuid
         parameters['loader'].setObject(taskForProcessing.people)
         parameters['taskFinalizer'] = taskForProcessing.setExecuted
 
-        pullgerMultisessionManager_API.addTask(**parameters)
+        pullgerMultiSessionManager_API.add_task(**parameters)
         taskForProcessing.setSended()
