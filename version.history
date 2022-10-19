@@ -1,5 +1,10 @@
-# {0.0.2.1} [pullgerReflection/com_linkedin__TT]
-#   - refactoring call exception from module pullgerExceptions
+Version history [pullgerReflection.com_linkedin__TT]
 
-# {0.0.2.0} [pullgerReflection/com_linkedin__TT]
-#   - initialization version
+{0.1.0.0} [pullgerReflection.com_linkedin__TT]
+ - cumulative update
+
+{0.0.2.1} [pullgerReflection/com_linkedin__TT]
+ - refactoring call exception from module pullgerExceptions
+
+{0.0.2.0} [pullgerReflection/com_linkedin__TT]
+ - initialization version
