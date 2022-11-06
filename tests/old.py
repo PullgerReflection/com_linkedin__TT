@@ -36,7 +36,7 @@ class TestDB(TestCase):
         self.assertIsNotNone(newObjectInstance.uuid,'UUID not seted')
 
         #Check link
-        self.assertTrue(com_linkedin__TT_MODEL.LinkPeople.objects.isLinkExist(newObjectInstance.uuid), 'Link not created')
+        self.assertTrue(com_linkedin__TT_MODEL.LinkPeople.objects.is_link_exist(newObjectInstance.uuid), 'Link not created')
 
 
         #Check result with reread
@@ -47,7 +47,7 @@ class TestDB(TestCase):
             self.assertEqual(getattr(checkNewObjectInstance,keyData), valueData, f'Incorrect compare DATA on new object in [{keyData}] field: [{getattr(checkNewObjectInstance,keyData)}]<>[{valueData}]')
 
         from django.apps import apps
-        from pullgerMultiSessionManager import api as pullgerMM_API
+        from pullgerMultiSessionManager import apiMSM as pullgerMM_API
 
         reglament_app = apps.get_app_config('pullgerMultiSessionManager')
         reglament_app.multisessionManager = generator.ConnectionManager()
@@ -55,7 +55,6 @@ class TestDB(TestCase):
         com_linkedin__TT_API.send_task_for_processing()
 
         #ADD TEST ACCOUNT
-        from pullgerAccountManager.tests import dataFactory
         dataFactory.addLinkedinAccount()
         # ===================================================
         pullgerMM_API.add_new_session()
