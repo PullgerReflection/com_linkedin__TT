@@ -6,7 +6,7 @@ from pullgerInternalControl import pIC_pR
 
 
 @receiver(signals.post_save, sender=models_core.People)
-@receiver(signals.post_save, sender=models_core.Companies)
+# @receiver(signals.post_save, sender=models_core.Companies)
 @receiver(signals.post_save, sender=models_core.SearchRequests)
 def add_taskflow_on_crating(sender, instance, created, **kwargs):
     if created is True:

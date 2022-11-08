@@ -52,18 +52,18 @@ class LinkPeople(models.Model):
         self.save()
 
     @classmethod
-    def checkAndCreateLink(cls, inModelElement):
-        if cls.objects.is_link_exist(inModelElement.uuid) == False:
-            newLink = cls()
-            newLink.people = inModelElement
-            newLink.handler = com_linkedin_TaskThread.Operations.PEOPLE.INITIAL_LOAD.name
-            newLink.save()
+    def check_and_create_link(cls, in_model_element):
+        if cls.objects.is_link_exist(in_model_element.uuid) is False:
+            new_link = cls()
+            new_link.people = in_model_element
+            new_link.handler = com_linkedin_TaskThread.Operations.PEOPLE.INITIAL_LOAD.name
+            new_link.save()
 
 
 class ExecutionStackLinksManager(models.Manager):
     def is_link_exist(self, uuid_link):
-        objLink = self.filter(uuid_link=uuid_link).first()
-        if objLink is None:
+        obj_link = self.filter(uuid_link=uuid_link).first()
+        if obj_link is None:
             return False
         else:
             return True
@@ -76,6 +76,9 @@ class ExecutionStackLinksManager(models.Manager):
             self = ExecutionStackLinks.objects
 
         return self.filter(uuid=str(uuid)).first()
+
+    def initialization_clear(self):
+        self.filter(Q(sent=True) & Q(executed=False)).update(sent=False)
 
 
 class ExecutionStackLinks(models.Model):
